@@ -17,10 +17,10 @@ class About extends Component {
         console.log(a.imgpath)
         super(props)
         this.state={
-            imgpath:a.imgpath,
-            name:a.name,
-            rating:a.rating,
-            desc:a.desc
+            imgpath:window.localStorage.getItem('imgpath'),
+            name:window.localStorage.getItem('name'),
+            rating:window.localStorage.getItem('rating'),
+            desc:window.localStorage.getItem('desc')
         }
     }
   render() {

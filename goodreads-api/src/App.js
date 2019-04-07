@@ -9,7 +9,7 @@ class App extends Component {
     this.state={
       status:'list-group-item active',
       value:'',
-      imgpath: 'https://images-na.ssl-images-amazon.com/images/I/41769C3ZE8L._SX399_BO1,204,203,200_.jpg'
+      imgpath: ''
     }
     this.handleChange=this.handleChange.bind(this)
     this.click=this.click.bind(this)
@@ -28,12 +28,13 @@ class App extends Component {
   }).then(function(response) {
     return response.json();
   })
-  .then(myJson=>this.setState({value:(JSON.parse(JSON.stringify(myJson).replace('[','').replace(']','')))})).catch(err=>{alert("no book found")})
+  .then(myJson=>this.setState({value:(JSON.parse(JSON.stringify(myJson).replace('[','').replace(']','')))})).catch(err=>{alert("no book found");this.setState({})})
   }
   click(e){
-    var url = "/about?imgpath=" + this.state.value.imgpath+'&name='+this.state.value.name+'&rating='+this.state.value.rating+'&desc='+this.state.value.description;
-var element = document.getElementById('YOUR_ID');
-element.setAttribute("href",url)
+    window.localStorage.setItem('imgpath',this.state.value.imgpath)
+    window.localStorage.setItem('name',this.state.value.name)
+    window.localStorage.setItem('rating',this.state.value.rating)
+    window.localStorage.setItem('desc',this.state.value.description)
   }
   render() {
     return (
@@ -51,7 +52,7 @@ element.setAttribute("href",url)
           </div>
           <div className="form-row">
             <div className="col-7"><div className="list-group">
-        <a href="#" id="YOUR_ID" className={this.state.status} onClick={this.click}>{this.state.value.name}</a>
+        <a href="/about" id="YOUR_ID" className={this.state.status} onClick={this.click}>{this.state.value.name}</a>
         
         </div></div>
           </div>
