@@ -1,5 +1,7 @@
 .App {
+  position: relative;
   text-align: center;
+  top:300px
 }
 
 .App-logo {
@@ -30,4 +32,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.checked {
+  color: orange;
 }
