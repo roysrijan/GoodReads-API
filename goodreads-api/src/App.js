@@ -7,7 +7,7 @@ class App extends Component {
   constructor(){
     super()
     this.state={
-      status:'list-group-item active',
+      status:'',
       value:'',
       imgpath: ''
     }
@@ -16,7 +16,10 @@ class App extends Component {
   }
 
   async handleChange(e){
-    
+    this.setState({
+      status:'list-group-item active'
+    })
+
     fetch('http://localhost:8080/book',{
     method: 'post',
     mode:'cors', 
@@ -28,7 +31,10 @@ class App extends Component {
   }).then(function(response) {
     return response.json();
   })
-  .then(myJson=>this.setState({value:(JSON.parse(JSON.stringify(myJson).replace('[','').replace(']','')))})).catch(err=>{alert("no book found");this.setState({})})
+  .then(myJson=>this.setState({value:(JSON.parse(JSON.stringify(myJson).replace('[','').replace(']','')))})).catch(err=>{alert("no book found");this.setState({
+    status:'',
+    value:''
+  })})
   }
   click(e){
     window.localStorage.setItem('imgpath',this.state.value.imgpath)
