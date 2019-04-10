@@ -46,7 +46,7 @@ class About extends Component {
                     <div class="col-md-10">
                         <p>
                             <a class="float-left" href="#"><strong>{this.state.name}</strong></a>
-                            <div dangerouslySetInnerHTML={{ __html: rating }} />
+                            <span dangerouslySetInnerHTML={{ __html: rating }} />
                             
     
                        </p>
@@ -59,11 +59,10 @@ class About extends Component {
                     </div>
                 </div>
                     <div class="card card-inner">
-                        
-                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        </div>
     );
   }
 }

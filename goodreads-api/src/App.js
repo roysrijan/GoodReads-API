@@ -15,10 +15,17 @@ class App extends Component {
     this.click=this.click.bind(this)
   }
 
-  async handleChange(e){
+  handleChange(e){
     this.setState({
       status:'list-group-item active'
     })
+    if(e.target.value.trim()==""){
+      this.setState({
+        value:'',
+        status:''
+      })
+      throw ""
+    }
 
     fetch('http://localhost:8080/book',{
     method: 'post',
@@ -31,7 +38,8 @@ class App extends Component {
   }).then(function(response) {
     return response.json();
   })
-  .then(myJson=>this.setState({value:(JSON.parse(JSON.stringify(myJson).replace('[','').replace(']','')))})).catch(err=>{alert("no book found");this.setState({
+  .then(myJson=>{if(myJson.length==0){throw "";};myJson.forEach(m=>{this.setState({value:(JSON.parse(JSON.stringify(m).replace('[','').replace(']','')))})}) ;}).catch(err=>{//alert("no book found"+err);
+  this.setState({
     status:'',
     value:''
   })})
